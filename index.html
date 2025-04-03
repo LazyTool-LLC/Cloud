@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LazyCloud</title>
+    <style>
+        body {
+            background: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .container {
+            margin-top: 20vh;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        h1, p {
+            background: linear-gradient(45deg, #d4aaff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+        button {
+            background: linear-gradient(45deg, #8a2be2, #d4aaff);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #6a1bb8, #b38cd9);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>LazyCloud</h1>
+        <p>Enter the registration data</p>
+        <input type="text" id="name" placeholder="your email">
+        <textarea id="message" placeholder="your password"></textarea>
+        <button onclick="sendData()"To send"</button>
+    </div>
+
+    <script>
+        function sendData() {
+            let name = document.getElementById("name").value.trim();
+            let message = document.getElementById("message").value.trim();
+
+            if (!name || !message) {
+                alert("Fill in all the fields!");ф
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("name", name);
+            formData.append("message", message);
+
+            fetch("send.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert("Sending error: " + error));
+        }
+    </script>
+
+</body>
+</html>
